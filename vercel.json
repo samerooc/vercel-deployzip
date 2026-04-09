@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api/**/*.py": {
-      "runtime": "python3.9"
-    }
-  },
   "rewrites": [
     { "source": "/api/data",         "destination": "/api/data.py" },
     { "source": "/api/admin/login",  "destination": "/api/admin/login.py" },
