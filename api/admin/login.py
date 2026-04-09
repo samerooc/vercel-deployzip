@@ -1,12 +1,11 @@
 import os
-import re
 import hmac
 import hashlib
 import json
 from http.server import BaseHTTPRequestHandler
 
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin123")
-SECRET_KEY     = os.environ.get("SECRET_KEY", "changeme")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
+SECRET_KEY     = os.environ.get("SECRET_KEY")
 
 def make_token(pw: str) -> str:
     return hmac.new(SECRET_KEY.encode(), pw.encode(), hashlib.sha256).hexdigest()
