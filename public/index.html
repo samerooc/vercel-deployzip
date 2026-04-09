@@ -177,7 +177,11 @@ nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.5)}
 .player-layout{display:grid;grid-template-columns:1fr 360px;height:calc(100vh - 64px);overflow:hidden}
 .player-main{overflow-y:auto;padding:24px}
 .player-video-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:var(--r2);overflow:hidden;box-shadow:0 0 0 1px var(--border),0 32px 80px rgba(0,0,0,.8)}
-#ytContainer{position:absolute;top:-10%;left:0;width:100%;height:120%;border:none;pointer-events:none}
+#ytContainer{position:absolute;top:-62px;left:-1px;width:calc(100% + 2px);height:calc(100% + 124px);border:none;pointer-events:none;z-index:1}
+/* YT logo/branding masking bars — covers top-left logo + any bottom bleed */
+.yt-mask-top{position:absolute;top:0;left:0;right:0;height:62px;background:#000;z-index:2;pointer-events:none}
+.yt-mask-bot{position:absolute;bottom:0;left:0;right:0;height:62px;background:#000;z-index:2;pointer-events:none}
+.yt-mask-corner{position:absolute;top:62px;left:0;width:180px;height:44px;background:#000;z-index:2;pointer-events:none}
 /* Overlay */
 .player-overlay{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;cursor:pointer}
 .player-overlay-top{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
@@ -394,6 +398,9 @@ nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.5)}
     <div class="player-main">
       <div class="player-video-wrap">
         <div id="ytContainer"></div>
+        <div class="yt-mask-top"></div>
+        <div class="yt-mask-bot"></div>
+        <div class="yt-mask-corner"></div>
         <div class="player-overlay paused" id="playerOverlay"
              onclick="handleOverlayClick(event)"
              ondblclick="handleOverlayDbl(event)">
@@ -500,9 +507,120 @@ nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.5)}
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
 /* ════════════════════
+   DEMO DATA — shown when MongoDB is empty
+════════════════════ */
+const DEMO_DATA = {
+  "Physics": {
+    "Mechanics": [
+      {title:"Lecture 1 — Introduction to Motion", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Newton's Laws of Motion", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Work, Energy & Power", yt_id:"", yt_link:""},
+      {title:"Lecture 4 — Circular Motion", yt_id:"", yt_link:""}
+    ],
+    "Thermodynamics": [
+      {title:"Lecture 1 — Heat & Temperature", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Laws of Thermodynamics", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Entropy & Applications", yt_id:"", yt_link:""}
+    ],
+    "Electrostatics": [
+      {title:"Lecture 1 — Coulomb's Law", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Electric Field & Potential", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Capacitance", yt_id:"", yt_link:""}
+    ]
+  },
+  "Chemistry": {
+    "Organic Chemistry": [
+      {title:"Lecture 1 — Hydrocarbons Basics", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Functional Groups", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Reactions & Mechanisms", yt_id:"", yt_link:""}
+    ],
+    "Inorganic Chemistry": [
+      {title:"Lecture 1 — Periodic Table & Trends", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Chemical Bonding", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Coordination Compounds", yt_id:"", yt_link:""}
+    ],
+    "Physical Chemistry": [
+      {title:"Lecture 1 — Atomic Structure", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Equilibrium", yt_id:"", yt_link:""}
+    ]
+  },
+  "Mathematics": {
+    "Basic Math": [
+      {title:"Lecture 1 — Number System", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Fractions & Decimals", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Percentages & Ratios", yt_id:"", yt_link:""},
+      {title:"Lecture 4 — LCM, HCF & Sets", yt_id:"", yt_link:""}
+    ],
+    "Algebra": [
+      {title:"Lecture 1 — Linear Equations", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Quadratic Equations", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Polynomials", yt_id:"", yt_link:""},
+      {title:"Lecture 4 — Sequences & Series", yt_id:"", yt_link:""}
+    ],
+    "Calculus": [
+      {title:"Lecture 1 — Limits & Continuity", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Differentiation Basics", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Applications of Derivatives", yt_id:"", yt_link:""},
+      {title:"Lecture 4 — Integration", yt_id:"", yt_link:""}
+    ],
+    "Trigonometry": [
+      {title:"Lecture 1 — Trigonometric Ratios", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Identities & Formulas", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Inverse Trigonometry", yt_id:"", yt_link:""}
+    ]
+  },
+  "Biology": {
+    "Cell Biology": [
+      {title:"Lecture 1 — Cell Structure & Organelles", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Cell Division — Mitosis", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Cell Division — Meiosis", yt_id:"", yt_link:""}
+    ],
+    "Genetics": [
+      {title:"Lecture 1 — DNA Structure & Replication", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Mendelian Genetics", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Mutations & Genetic Disorders", yt_id:"", yt_link:""}
+    ],
+    "Human Physiology": [
+      {title:"Lecture 1 — Digestive System", yt_id:"", yt_link:""},
+      {title:"Lecture 2 — Circulatory System", yt_id:"", yt_link:""},
+      {title:"Lecture 3 — Respiratory System", yt_id:"", yt_link:""}
+    ]
+  },
+  "PYQ": {
+    "2024 Paper": [
+      {title:"2024 Full Paper Discussion", yt_id:"", yt_link:""},
+      {title:"2024 Tricky Questions Solved", yt_id:"", yt_link:""},
+      {title:"2024 Answer Key Review", yt_id:"", yt_link:""}
+    ],
+    "2023 Paper": [
+      {title:"2023 Full Paper Discussion", yt_id:"", yt_link:""},
+      {title:"2023 Most Important Questions", yt_id:"", yt_link:""}
+    ],
+    "2022 Paper": [
+      {title:"2022 Full Paper Discussion", yt_id:"", yt_link:""},
+      {title:"2022 Analysis & Strategy", yt_id:"", yt_link:""}
+    ]
+  },
+  "Questions Discussion": {
+    "Doubt Sessions": [
+      {title:"Doubt Session 1 — Physics Doubts", yt_id:"", yt_link:""},
+      {title:"Doubt Session 2 — Chemistry Doubts", yt_id:"", yt_link:""},
+      {title:"Doubt Session 3 — Math Doubts", yt_id:"", yt_link:""},
+      {title:"Doubt Session 4 — Biology Doubts", yt_id:"", yt_link:""}
+    ],
+    "Important Questions": [
+      {title:"Top 50 Physics Questions", yt_id:"", yt_link:""},
+      {title:"Top 50 Chemistry Questions", yt_id:"", yt_link:""},
+      {title:"Top 50 Math Questions", yt_id:"", yt_link:""}
+    ]
+  }
+};
+
+/* ════════════════════
    DATA & STATE
 ════════════════════ */
 let DATA = {};          // {batchName: {topicName: [{title,yt_id,yt_link}]}}
+let isDemoMode = false;
 let player = null;
 let timerID = null;
 let isMuted = false;
@@ -520,10 +638,13 @@ async function boot() {
     if (!r.ok) throw new Error('API error');
     const j = await r.json();
     DATA = j.batches || {};
+    if (!Object.keys(DATA).length) { DATA = DEMO_DATA; isDemoMode = true; }
     renderHome();
     renderExplore();
   } catch(e) {
-    showToast('Failed to load data. Check connection.', 'error');
+    DATA = DEMO_DATA; isDemoMode = true;
+    renderHome();
+    renderExplore();
   }
 }
 
@@ -579,10 +700,24 @@ function renderExplore() {
   setTimeout(() => grid.querySelectorAll('.bc-bar').forEach(el => { el.style.width = (Math.random()*60+20)+'%'; }), 100);
 }
 
+function subjectIcon(name) {
+  const n = name.toLowerCase();
+  if (n.includes('physics') || n.includes('phy')) return '⚛️';
+  if (n.includes('chem') || n.includes('che')) return '🧪';
+  if (n.includes('math') || n.includes('maths')) return '📐';
+  if (n.includes('bio') || n.includes('biology')) return '🧬';
+  if (n.includes('pyq') || n.includes('previous')) return '📝';
+  if (n.includes('question') || n.includes('doubt') || n.includes('discuss')) return '💬';
+  if (n.includes('english') || n.includes('eng')) return '📖';
+  if (n.includes('history') || n.includes('geo') || n.includes('social')) return '🌍';
+  if (n.includes('computer') || n.includes('cs') || n.includes('coding')) return '💻';
+  return name.substring(0,2).toUpperCase();
+}
+
 function batchCardHTML(b, compact) {
   const ts = Object.keys(DATA[b]);
   const lecs = ts.reduce((s,t) => s+DATA[b][t].length, 0);
-  const ic = b.substring(0,2).toUpperCase();
+  const ic = subjectIcon(b);
   const topicPills = ts.slice(0,3).map(t=>`<span class="bc-topic">${t}</span>`).join('') + (ts.length>3?`<span class="bc-topic">+${ts.length-3}</span>`:'');
   return `<div class="batch-card" onclick="openBatch('${esc(b)}')">
     <div class="bc-top">
@@ -618,7 +753,7 @@ function openBatch(b) {
   const lecs = ts.reduce((s,t)=>s+DATA[b][t].length,0);
   const ic = b.substring(0,2).toUpperCase();
 
-  document.getElementById('topicsIcon').textContent = ic;
+  document.getElementById('topicsIcon').textContent = subjectIcon(b);
   document.getElementById('topicsTitle').textContent = b;
   document.getElementById('topicsDesc').textContent = `${ts.length} topics · ${lecs} lectures`;
   document.getElementById('topicsTags').innerHTML = ts.slice(0,5).map(t=>`<span class="tag">${t}</span>`).join('');
@@ -703,6 +838,7 @@ function playVideo(vid, title, batch, topic, idx, list) {
   document.getElementById('playerBatch').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>${batch}`;
   document.getElementById('playerTopic').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>${topic}`;
 
+  if (!vid) { showToast('Demo lecture — upload real videos via your bot to watch.', 'error'); return; }
   if (!ytReady) { pendingPlay = {vid, title, batch, topic, idx, list}; return; }
 
   if (player && player.loadVideoById) {
