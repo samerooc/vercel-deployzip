@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/ranaji", "destination": "/ranaji.html" },
+    { "source": "/api/data", "destination": "/api/data.py" },
+    { "source": "/api/admin/login", "destination": "/api/admin/login.py" },
+    { "source": "/api/admin/data", "destination": "/api/admin/data.py" },
+    { "source": "/api/admin/toggle", "destination": "/api/admin/toggle.py" }
+  ]
+}

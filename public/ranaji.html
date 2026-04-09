@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Admin — StudyVault</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#07090f;--surface:#0e1220;--card:#131829;--border:#1e2538;--accent:#5865f2;--green:#22c55e;--red:#ef4444;--text:#e2e8f0;--muted:#64748b;--r:10px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+#ls{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.lb{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;width:100%;max-width:380px;text-align:center}
+.ll{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#5865f2,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.ls{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+.inp{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:12px 16px;border-radius:var(--r);font-size:.9rem;outline:none;margin-bottom:14px;font-family:'Figtree',sans-serif}
+.inp:focus{border-color:var(--accent)}
+.btn{width:100%;background:var(--accent);color:#fff;border:none;padding:12px;border-radius:var(--r);font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Figtree',sans-serif}
+.btn:hover{opacity:.85}
+.em{color:#ef4444;font-size:.8rem;margin-top:8px;display:none}
+#app{display:none}
+header{display:flex;align-items:center;gap:12px;padding:14px 24px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;background:linear-gradient(135deg,#5865f2,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.bdg{background:#5865f220;color:#5865f2;font-size:.7rem;padding:3px 10px;border-radius:20px;font-weight:600}
+.lout{margin-left:auto;background:none;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:var(--r);cursor:pointer;font-size:.8rem;font-family:'Figtree',sans-serif}
+.lout:hover{border-color:var(--red);color:var(--red)}
+.wrap{max-width:900px;margin:0 auto;padding:24px}
+.pt{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:4px}
+.ps{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+.bb{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+.br{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+.br:hover{background:rgba(255,255,255,.02)}
+.bic{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#5865f2,#22d3ee);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;flex-shrink:0}
+.btn2{flex:1;font-weight:600;font-size:.9rem;text-align:left}
+.lcc{font-size:.75rem;color:var(--muted)}
+.tog{position:relative;width:44px;height:24px;flex-shrink:0}
+.tog input{opacity:0;width:0;height:0}
+.sl{position:absolute;inset:0;background:#333;border-radius:24px;cursor:pointer;transition:.3s}
+.sl::before{content:'';position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
+input:checked+.sl{background:var(--green)}
+input:checked+.sl::before{transform:translateX(20px)}
+.tp{display:none;border-top:1px solid var(--border);padding:0 16px 12px}
+.bb.open .tp{display:block}
+.chv{transition:transform .3s;color:var(--muted)}
+.bb.open .chv{transform:rotate(180deg)}
+.tr{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.tr:last-child{border-bottom:none}
+.tn{flex:1;font-size:.85rem}
+.tc{font-size:.72rem;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0}
+.dot.h{background:var(--red)}
+.loading{display:flex;align-items:center;justify-content:center;height:200px;gap:12px;color:var(--muted)}
+.spin{width:24px;height:24px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--green);color:#000;padding:10px 20px;border-radius:var(--r);font-size:.85rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div id="ls">
+  <div class="lb">
+    <div class="ll">StudyVault</div>
+    <div class="ls">Admin Panel &mdash; Restricted Access</div>
+    <input type="password" class="inp" id="pw" placeholder="Password..." onkeydown="if(event.key==='Enter')login()"/>
+    <button class="btn" onclick="login()">Login</button>
+    <div class="em" id="em">&#10060; Wrong password</div>
+  </div>
+</div>
+<div id="app">
+  <header>
+    <div class="logo">StudyVault</div>
+    <span class="bdg">Admin</span>
+    <button class="lout" onclick="logout()">Logout</button>
+  </header>
+  <div class="wrap">
+    <div class="pt">Visibility Control</div>
+    <div class="ps">Batches aur topics show/hide karo &mdash; instantly website pe reflect hoga.</div>
+    <div id="cnt"><div class="loading"><div class="spin"></div><span>Loading...</span></div></div>
+  </div>
+</div>
+<div class="toast" id="toast">&#10003; Saved!</div>
+<script>
+let TOK=localStorage.getItem('sv_tok')||'';
+let BD={};
+async function login(){
+  const pw=document.getElementById('pw').value;
+  try{
+    const r=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw})});
+    if(!r.ok){document.getElementById('em').style.display='block';return;}
+    const j=await r.json();TOK=j.token;localStorage.setItem('sv_tok',TOK);showApp();
+  }catch(e){document.getElementById('em').style.display='block';}
+}
+function logout(){localStorage.removeItem('sv_tok');location.reload();}
+function showApp(){document.getElementById('ls').style.display='none';document.getElementById('app').style.display='block';load();}
+if(TOK)showApp();
+async function load(){
+  try{
+    const r=await fetch('/api/admin/data',{headers:{'X-Admin-Token':TOK}});
+    if(r.status===401){logout();return;}
+    const j=await r.json();BD=j.batches||{};render();
+  }catch(e){document.getElementById('cnt').innerHTML='<div class="loading">&#10060; Load failed</div>';}
+}
+function render(){
+  const bs=Object.keys(BD);
+  if(!bs.length){document.getElementById('cnt').innerHTML='<div class="loading">Koi data nahi &mdash; pehle bot se video upload karo</div>';return;}
+  document.getElementById('cnt').innerHTML=bs.map((b,bi)=>{
+    const bd=BD[b],ts=Object.keys(bd.topics||{});
+    const tot=ts.reduce((s,t)=>s+bd.topics[t].lectures.length,0);
+    const ic=b.substring(0,2).toUpperCase();
+    const tRows=ts.map(t=>{
+      const td=bd.topics[t],tk=encodeURIComponent(b+'||'+t);
+      return`<div class="tr">
+        <div class="dot${td.hidden?' h':''}"></div>
+        <div class="tn">${t}</div>
+        <div class="tc">${td.lectures.length} lec</div>
+        <label class="tog"><input type="checkbox"${!td.hidden?' checked':''} onchange="tog(decodeURIComponent('${tk}'),!this.checked)"/><span class="sl"></span></label>
+      </div>`;
+    }).join('');
+    return`<div class="bb" id="bb${bi}">
+      <div class="br" onclick="tBlock(${bi})">
+        <div class="bic">${ic}</div>
+        <div class="btn2">${b}</div>
+        <div class="lcc">${tot} lectures &middot; ${ts.length} topics</div>
+        <label class="tog" onclick="event.stopPropagation()">
+          <input type="checkbox"${!bd.hidden?' checked':''} onchange="tog('${encodeURIComponent(b)}',!this.checked,true)"/><span class="sl"></span>
+        </label>
+        <svg class="chv" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+      </div>
+      <div class="tp">${tRows}</div>
+    </div>`;
+  }).join('');
+}
+function tBlock(bi){document.getElementById(`bb${bi}`).classList.toggle('open');}
+async function tog(key,hidden){
+  try{
+    await fetch('/api/admin/toggle',{method:'POST',headers:{'Content-Type':'application/json','X-Admin-Token':TOK},body:JSON.stringify({key,hidden})});
+    showToast();await load();
+  }catch(e){alert('Save failed!');}
+}
+function showToast(){const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+</script>
+</body>
+</html>
