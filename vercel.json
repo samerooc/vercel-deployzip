@@ -5,5 +5,10 @@
     { "source": "/api/admin/login", "destination": "/api/admin/login.py" },
     { "source": "/api/admin/data", "destination": "/api/admin/data.py" },
     { "source": "/api/admin/toggle", "destination": "/api/admin/toggle.py" }
-  ]
+  ],
+  "functions": {
+    "api/*.py": {
+      "runtime": "python3.12"
+    }
+  }
 }
