@@ -26,294 +26,56 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 /* ── BACKGROUND ORBS ── */
 .orb-wrap{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;animation:drift 20s ease-in-out infinite alternate}
-.orb1{width:500px;height:500px;background:radial-gradient(circle,#6c63ff,transparent);top:-100px;left:-100px;animation-delay:0s}
-.orb2{width:400px;height:400px;background:radial-gradient(circle,#06d6f5,transparent);bottom:-80px;right:-80px;animation-delay:-7s}
-.orb3{width:300px;height:300px;background:radial-gradient(circle,#f472b6,transparent);top:40%;left:60%;animation-delay:-14s}
-@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(40px,30px) scale(1.08)}}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,#6c63ff,transparent);top:-100px;left:-100px}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,#06d6f5,transparent);bottom:-80px;right:-80px}
 
 /* ── NAVBAR ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:64px;display:flex;align-items:center;gap:8px;backdrop-filter:blur(24px) saturate(180%);background:rgba(4,6,14,.75);border-bottom:1px solid rgba(255,255,255,.05);transition:box-shadow .3s}
-nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.5)}
-.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;background:linear-gradient(135deg,var(--a),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;flex-shrink:0}
-.nav-logo span{font-weight:300;opacity:.7}
-.nav-links{display:flex;align-items:center;gap:4px;margin:0 auto}
-.nav-btn{background:none;border:none;color:var(--muted2);font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:500;padding:8px 16px;border-radius:10px;cursor:pointer;transition:all .2s;position:relative}
-.nav-btn::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%) scaleX(0);width:20px;height:2px;background:linear-gradient(90deg,var(--a),var(--cyan));border-radius:2px;transition:transform .2s}
-.nav-btn:hover{color:var(--text);background:rgba(255,255,255,.05)}
-.nav-btn.active{color:var(--text)}
-.nav-btn.active::after{transform:translateX(-50%) scaleX(1)}
-.nav-right{display:flex;align-items:center;gap:12px}
-.nav-search{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;width:200px;transition:all .2s}
-.nav-search:focus{border-color:var(--a);background:rgba(108,99,255,.08);width:240px}
-.nav-search::placeholder{color:var(--muted)}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:64px;display:flex;align-items:center;backdrop-filter:blur(24px);background:rgba(4,6,14,.75);border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;background:linear-gradient(135deg,var(--a),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}
 
 /* ── PAGE SYSTEM ── */
 .page{display:none;position:relative;z-index:1;min-height:100vh;padding-top:64px}
 .page.active{display:block}
-.page-enter{animation:pageIn .4s cubic-bezier(.16,1,.3,1) both}
-@keyframes pageIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
-/* ════════════════════════════════
-   PAGE 1 — HOME
-════════════════════════════════ */
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-
-/* Compact top banner */
-.home-banner{padding:36px 32px 28px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.banner-left{}
-.banner-tag{font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--a);margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.banner-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:pulse 2s infinite}
-.banner-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;line-height:1.15}
-.banner-title .gr{background:linear-gradient(135deg,var(--a),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.banner-sub{font-size:.9rem;color:var(--muted2);margin-top:6px}
-.banner-stats{display:flex;gap:24px;flex-wrap:wrap}
-.bstat{text-align:center}
-.bstat-num{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;background:linear-gradient(135deg,var(--a),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
-.bstat-lbl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
-
-/* Subject folder grid — the MAIN content */
-.subjects-wrap{max-width:1200px;margin:0 auto;padding:0 24px 40px}
-.subjects-label{font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
-.subjects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-
-/* Subject Folder Card */
-.subj-card{border-radius:20px;padding:26px;cursor:pointer;position:relative;overflow:hidden;transition:all .35s cubic-bezier(.16,1,.3,1);border:1px solid transparent;transform-style:preserve-3d}
-.subj-card::before{content:'';position:absolute;inset:0;border-radius:20px;opacity:0;transition:opacity .3s}
-.subj-card:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(255,255,255,.12)}
-.subj-card:hover::before{opacity:1}
-
-/* Per-subject colour themes */
-.subj-physics{background:linear-gradient(145deg,#0d1433,#111a3a);--sc:#6c63ff;--sc2:#8b5cf6}
-.subj-physics::before{background:linear-gradient(135deg,rgba(108,99,255,.12),transparent)}
-.subj-chem{background:linear-gradient(145deg,#0d2020,#0f2828);--sc:#06d6f5;--sc2:#22d3ee}
-.subj-chem::before{background:linear-gradient(135deg,rgba(6,214,245,.12),transparent)}
-.subj-math{background:linear-gradient(145deg,#1a1020,#1f0d2a);--sc:#f472b6;--sc2:#ec4899}
-.subj-math::before{background:linear-gradient(135deg,rgba(244,114,182,.12),transparent)}
-.subj-bio{background:linear-gradient(145deg,#0d2010,#0f2a14);--sc:#22c55e;--sc2:#16a34a}
-.subj-bio::before{background:linear-gradient(135deg,rgba(34,197,94,.12),transparent)}
-.subj-pyq{background:linear-gradient(145deg,#201a08,#2a220a);--sc:#fbbf24;--sc2:#f59e0b}
-.subj-pyq::before{background:linear-gradient(135deg,rgba(251,191,36,.12),transparent)}
-.subj-doubt{background:linear-gradient(145deg,#12101f,#18152a);--sc:#a78bfa;--sc2:#7c3aed}
-.subj-doubt::before{background:linear-gradient(135deg,rgba(167,139,250,.12),transparent)}
-.subj-default{background:linear-gradient(145deg,var(--card),var(--card2));--sc:var(--a);--sc2:var(--a2)}
-.subj-default::before{background:linear-gradient(135deg,var(--glow1),transparent)}
-
-.sc-top{display:flex;align-items:center;gap:14px;margin-bottom:20px}
-.sc-emoji{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 24px rgba(0,0,0,.3);transition:transform .3s}
-.subj-card:hover .sc-emoji{transform:scale(1.1) rotate(-3deg)}
-.sc-info{flex:1}
-.sc-name{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:5px;color:var(--text)}
-.sc-meta{font-size:.78rem;color:rgba(255,255,255,.45);display:flex;gap:10px;flex-wrap:wrap}
-.sc-chapters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;min-height:24px}
-.sc-chapter{font-size:.7rem;padding:3px 10px;border-radius:100px;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04)}
-.sc-footer{display:flex;align-items:center;justify-content:space-between}
-.sc-bar-wrap{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.07);margin-right:14px;overflow:hidden}
-.sc-bar{height:100%;border-radius:3px;width:0%;transition:width 1.2s .5s ease-out}
-.subj-physics .sc-bar{background:linear-gradient(90deg,#6c63ff,#8b5cf6)}
-.subj-chem .sc-bar{background:linear-gradient(90deg,#06d6f5,#22d3ee)}
-.subj-math .sc-bar{background:linear-gradient(90deg,#f472b6,#ec4899)}
-.subj-bio .sc-bar{background:linear-gradient(90deg,#22c55e,#16a34a)}
-.subj-pyq .sc-bar{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
-.subj-doubt .sc-bar{background:linear-gradient(90deg,#a78bfa,#7c3aed)}
-.subj-default .sc-bar{background:linear-gradient(90deg,var(--a),var(--cyan))}
-.sc-arrow{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);font-size:1rem;transition:all .2s;flex-shrink:0}
-.subj-card:hover .sc-arrow{background:rgba(255,255,255,.12);color:#fff;transform:translateX(4px)}
-
-.btn-primary{background:linear-gradient(135deg,var(--a),var(--a2));color:#fff;border:none;padding:14px 32px;border-radius:12px;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;box-shadow:0 8px 32px rgba(108,99,255,.4);transition:all .25s}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(108,99,255,.55)}
-.btn-ghost{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--border2);padding:14px 32px;border-radius:12px;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;transition:all .25s}
-.btn-ghost:hover{background:rgba(255,255,255,.1);border-color:var(--a)}
-
-/* Recent / Featured Batches on Home */
-.home-batches{max-width:1200px;margin:0 auto 40px;padding:0 24px}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.section-title{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--muted2)}
-.see-all{background:none;border:none;color:var(--a);font-family:'Outfit',sans-serif;font-size:.85rem;cursor:pointer;display:flex;align-items:center;gap:5px;transition:gap .2s}
-.see-all:hover{gap:9px}
-.batch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-
-/* ════════════════════════════════
-   PAGE 2 — EXPLORE
-════════════════════════════════ */
-.explore-wrap{max-width:1200px;margin:0 auto;padding:48px 24px}
-.page-hero{margin-bottom:48px}
-.page-tag{font-size:.75rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--a);margin-bottom:12px}
-.page-ttl{font-family:'Space Grotesk',sans-serif;font-size:2.4rem;font-weight:700;line-height:1.2}
-.page-desc{font-size:1rem;color:var(--muted2);margin-top:12px;max-width:500px;line-height:1.7}
-.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
-.filter-chip{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted2);padding:8px 18px;border-radius:100px;font-size:.85rem;font-weight:500;cursor:pointer;transition:all .2s}
-.filter-chip:hover,.filter-chip.active{background:linear-gradient(135deg,rgba(108,99,255,.2),rgba(6,214,245,.1));border-color:var(--a);color:var(--text)}
-
-/* Batch Card (3D) */
-.batch-card{background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--r2);padding:28px;cursor:pointer;transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;transform-style:preserve-3d}
-.batch-card::after{content:'';position:absolute;inset:0;border-radius:var(--r2);background:linear-gradient(135deg,rgba(108,99,255,.08),rgba(6,214,245,.04));opacity:0;transition:opacity .3s}
-.batch-card:hover{transform:translateY(-8px) rotateX(3deg) rotateY(-1deg);box-shadow:0 24px 70px rgba(108,99,255,.25),0 0 0 1px rgba(108,99,255,.2);border-color:rgba(108,99,255,.4)}
-.batch-card:hover::after{opacity:1}
-.bc-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
-.bc-icon{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--a),var(--cyan));display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;flex-shrink:0;box-shadow:0 8px 24px rgba(108,99,255,.4)}
-.bc-meta{flex:1}
-.bc-name{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;line-height:1.3;margin-bottom:6px}
-.bc-stats{display:flex;gap:12px}
-.bc-stat{font-size:.75rem;color:var(--muted);display:flex;align-items:center;gap:4px}
-.bc-topics{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
-.bc-topic{background:rgba(255,255,255,.05);border:1px solid var(--border);padding:4px 10px;border-radius:100px;font-size:.72rem;color:var(--muted2)}
-.bc-footer{display:flex;align-items:center;justify-content:space-between}
-.bc-bar-wrap{flex:1;height:3px;background:var(--border);border-radius:3px;margin-right:12px}
-.bc-bar{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--a),var(--cyan));width:0%;transition:width 1s .3s}
-.bc-open{background:linear-gradient(135deg,var(--a),var(--a2));border:none;color:#fff;padding:8px 18px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
-.bc-open:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(108,99,255,.4)}
-
-/* ════════════════════════════════
-   PAGE 3 — TOPICS / LECTURES
-════════════════════════════════ */
-.topics-wrap{max-width:1200px;margin:0 auto;padding:48px 24px}
-.back-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted2);padding:8px 16px;border-radius:10px;cursor:pointer;font-size:.875rem;margin-bottom:32px;transition:all .2s}
-.back-btn:hover{color:var(--text);border-color:var(--border2)}
-.topics-header{display:flex;gap:20px;align-items:center;margin-bottom:40px;flex-wrap:wrap}
-.topics-icon{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,var(--a),var(--cyan));display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;box-shadow:0 12px 32px rgba(108,99,255,.45);flex-shrink:0}
-.topics-info h1{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700}
-.topics-info p{color:var(--muted2);font-size:.9rem;margin-top:6px}
-.topics-info .tags{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.tag{background:rgba(108,99,255,.12);border:1px solid rgba(108,99,255,.25);color:var(--a2);font-size:.75rem;padding:4px 12px;border-radius:100px;font-weight:500}
-
-/* Topic Accordion */
-.topic-section{margin-bottom:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .2s}
-.topic-section.open{border-color:var(--border2)}
-.topic-hdr{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;transition:background .2s}
-.topic-hdr:hover{background:rgba(255,255,255,.025)}
-.topic-num{width:32px;height:32px;border-radius:8px;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;font-family:'Space Grotesk',sans-serif;flex-shrink:0;transition:background .2s}
-.topic-section.open .topic-num{background:linear-gradient(135deg,var(--a),var(--a2));box-shadow:0 4px 12px rgba(108,99,255,.4)}
-.topic-name{flex:1;font-weight:600;font-size:.95rem}
-.topic-count{font-size:.78rem;color:var(--muted);background:var(--border);padding:3px 10px;border-radius:100px}
-.topic-chevron{color:var(--muted);transition:transform .3s}
-.topic-section.open .topic-chevron{transform:rotate(180deg)}
-.lectures-list{display:none;border-top:1px solid var(--border)}
-.topic-section.open .lectures-list{display:block}
-.lec-item{display:flex;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;border-bottom:1px solid var(--border);transition:all .2s;position:relative}
-.lec-item:last-child{border-bottom:none}
-.lec-item:hover{background:rgba(108,99,255,.06)}
-.lec-item.playing{background:rgba(108,99,255,.1)}
-.lec-item.playing::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--a),var(--cyan))}
-.lec-idx{width:36px;height:36px;border-radius:10px;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--muted);flex-shrink:0;transition:all .2s}
-.lec-item.playing .lec-idx{background:linear-gradient(135deg,var(--a),var(--cyan));color:#fff;box-shadow:0 4px 12px rgba(108,99,255,.4)}
-.lec-title{flex:1;font-size:.9rem;font-weight:500;line-height:1.4}
-.lec-play-ico{color:var(--muted);opacity:0;transition:all .2s}
-.lec-item:hover .lec-play-ico,.lec-item.playing .lec-play-ico{opacity:1;color:var(--a)}
-.lec-live-badge{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--cyan);font-weight:600}
-.lec-live-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:pulse 1.5s infinite}
-
-/* ════════════════════════════════
-   PAGE 4 — PLAYER
-════════════════════════════════ */
+/* ── STEALTH PLAYER STYLING ── */
 .player-layout{display:grid;grid-template-columns:1fr 360px;height:calc(100vh - 64px);overflow:hidden}
 .player-main{overflow-y:auto;padding:24px}
-.player-video-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:var(--r2);overflow:hidden;box-shadow:0 0 0 1px var(--border),0 32px 80px rgba(0,0,0,.8)}
-#ytContainer{position:absolute;top:-62px;left:-1px;width:calc(100% + 2px);height:calc(100% + 124px);border:none;pointer-events:none;z-index:1}
-/* YT logo/branding masking bars — covers top-left logo + any bottom bleed */
-.yt-mask-top{position:absolute;top:0;left:0;right:0;height:62px;background:#000;z-index:2;pointer-events:none}
-.yt-mask-bot{position:absolute;bottom:0;left:0;right:0;height:62px;background:#000;z-index:2;pointer-events:none}
-.yt-mask-corner{position:absolute;top:62px;left:0;width:180px;height:44px;background:#000;z-index:2;pointer-events:none}
-/* Overlay */
-.player-overlay{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;cursor:pointer}
-.player-overlay-top{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
-.skip-zone{flex:1;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
-.skip-zone.show{opacity:1}
-.skip-anim{font-size:2rem;color:rgba(255,255,255,.9);text-shadow:0 2px 12px rgba(0,0,0,.8)}
+.player-video-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:var(--r2);overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.8)}
+
+/* IMPORTANT: YT Stealth Clipping */
+#ytContainer{position:absolute;top:-65px;left:-2px;width:calc(100% + 4px);height:calc(100% + 130px);z-index:1;pointer-events:none}
+
+.yt-mask-top{position:absolute;top:0;left:0;right:0;height:66px;background:#000;z-index:2}
+.yt-mask-bot{position:absolute;bottom:0;left:0;right:0;height:66px;background:#000;z-index:2}
+.yt-mask-corner{position:absolute;top:66px;left:0;width:180px;height:45px;background:#000;z-index:2}
+
+/* Overlay and Controls */
+.player-overlay{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;cursor:default}
 .play-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;pointer-events:none}
 .player-overlay.paused .play-center{opacity:1}
-.play-btn-big{width:80px;height:80px;border-radius:50%;background:rgba(108,99,255,.85);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 40px rgba(108,99,255,.6)}
-/* Bottom controls */
-.player-controls{background:linear-gradient(transparent,rgba(0,0,0,.95));padding:20px 20px 16px;opacity:0;transform:translateY(8px);transition:all .25s}
-.player-overlay:hover .player-controls,.player-overlay.paused .player-controls{opacity:1;transform:translateY(0)}
-.progress-wrap{position:relative;height:4px;background:rgba(255,255,255,.15);border-radius:4px;cursor:pointer;margin-bottom:14px;transition:height .15s}
-.progress-wrap:hover{height:7px}
-.progress-fill{position:absolute;left:0;top:0;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--a),var(--cyan));pointer-events:none;transition:width .4s linear}
-.progress-dot{position:absolute;top:50%;right:-6px;transform:translateY(-50%);width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 8px rgba(108,99,255,.8);pointer-events:none;opacity:0;transition:opacity .15s}
-.progress-wrap:hover .progress-dot{opacity:1}
-.controls-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.ctrl-btn{background:none;border:none;color:rgba(255,255,255,.9);cursor:pointer;padding:6px;border-radius:8px;display:flex;align-items:center;transition:all .15s;flex-shrink:0}
-.ctrl-btn:hover{background:rgba(255,255,255,.12);color:#fff;transform:scale(1.1)}
-.ctrl-btn svg{width:20px;height:20px}
-.ctrl-btn.lg svg{width:24px;height:24px}
-.skip-btn{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;padding:6px 10px;min-width:42px;gap:2px}
-.time-disp{font-size:.8rem;color:rgba(255,255,255,.8);font-family:'Space Grotesk',sans-serif;font-variant-numeric:tabular-nums;white-space:nowrap;margin-left:4px}
+.play-btn-big{width:80px;height:80px;border-radius:50%;background:rgba(108,99,255,.85);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 40px rgba(108,99,255,.6);cursor:pointer;pointer-events:auto}
+
+.player-controls{background:linear-gradient(transparent,rgba(0,0,0,.95));padding:20px;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:auto}
+.player-overlay:hover .player-controls, .player-overlay.paused .player-controls{opacity:1;transform:translateY(0)}
+
+.progress-wrap{height:5px;background:rgba(255,255,255,.15);border-radius:4px;cursor:pointer;margin-bottom:15px;position:relative}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--a),var(--cyan));width:0%;border-radius:4px}
+
+.controls-row{display:flex;align-items:center;gap:12px}
+.ctrl-btn{background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;transition:0.2s}
+.ctrl-btn:hover{transform:scale(1.15);color:var(--cyan)}
+.time-disp{font-size:.85rem;font-family:'Space Grotesk',sans-serif;color:var(--muted2);margin-left:5px}
 .ctrl-spacer{flex:1}
-.vol-wrap{display:flex;align-items:center;gap:6px}
-.vol-slider{width:60px;height:4px;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,.2);border-radius:4px;cursor:pointer;outline:none}
-.vol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;background:#fff;border-radius:50%;cursor:pointer;transition:transform .15s}
-.vol-slider::-webkit-slider-thumb:hover{transform:scale(1.3)}
-.speed-sel,.qual-sel{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:.78rem;padding:4px 8px;border-radius:7px;cursor:pointer;font-family:'Outfit',sans-serif;outline:none}
-.speed-sel option,.qual-sel option{background:#1a1f35}
-/* Player Info */
-.player-info{margin-top:20px}
-.now-tag{font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--a);margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.now-tag .dot-live{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:pulse 1.5s infinite}
-.player-title{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;line-height:1.3;margin-bottom:14px}
-.player-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.pm-item{display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--muted2)}
-.player-nav{display:flex;gap:10px;margin-top:18px}
-.pn-btn{flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);padding:12px 16px;border-radius:12px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:8px;transition:all .2s;justify-content:center}
-.pn-btn:hover:not(:disabled){border-color:var(--a);background:rgba(108,99,255,.08);transform:translateY(-2px)}
-.pn-btn:disabled{opacity:.35;cursor:not-allowed}
-/* Playlist Sidebar */
-.playlist-sidebar{border-left:1px solid var(--border);overflow-y:auto;background:var(--s1)}
-.ps-header{padding:20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--s1);z-index:10;backdrop-filter:blur(12px)}
-.ps-title{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:600;margin-bottom:4px}
-.ps-sub{font-size:.78rem;color:var(--muted)}
-.ps-list{padding:8px 0}
-.ps-item{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.03);transition:background .2s;position:relative}
-.ps-item:hover{background:rgba(255,255,255,.04)}
-.ps-item.active{background:rgba(108,99,255,.1)}
-.ps-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--a),var(--cyan))}
-.ps-num{width:30px;height:30px;border-radius:8px;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--muted);flex-shrink:0;font-family:'Space Grotesk',sans-serif;transition:all .2s}
-.ps-item.active .ps-num{background:linear-gradient(135deg,var(--a),var(--cyan));color:#fff}
-.ps-name{flex:1;font-size:.82rem;font-weight:500;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.ps-ico{color:var(--muted);flex-shrink:0;opacity:0;transition:opacity .2s}
-.ps-item:hover .ps-ico,.ps-item.active .ps-ico{opacity:1;color:var(--a)}
 
-/* ── SEARCH PAGE ── */
-.search-wrap{max-width:900px;margin:0 auto;padding:48px 24px}
-.search-big{display:flex;gap:12px;margin-bottom:40px}
-.search-big input{flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);padding:16px 20px;border-radius:14px;font-family:'Outfit',sans-serif;font-size:1rem;outline:none;transition:border-color .2s}
-.search-big input:focus{border-color:var(--a)}
-.search-big button{background:linear-gradient(135deg,var(--a),var(--a2));border:none;color:#fff;padding:16px 28px;border-radius:14px;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer}
-.search-results{}
-.sr-item{display:flex;align-items:center;gap:14px;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;cursor:pointer;transition:all .2s}
-.sr-item:hover{border-color:var(--a);transform:translateX(4px)}
-.sr-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--a),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
-.sr-info .sr-title{font-size:.9rem;font-weight:600}
-.sr-info .sr-meta{font-size:.78rem;color:var(--muted);margin-top:3px}
+.speed-sel, .qual-sel{background:rgba(255,255,255,0.08);border:1px solid var(--border);color:#fff;font-size:.75rem;padding:5px 8px;border-radius:8px;cursor:pointer;outline:none}
 
-/* ── LOADING ── */
-.loading-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:50vh;gap:16px;color:var(--muted)}
-.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--a);border-radius:50%;animation:spin .7s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-text{font-size:.9rem;animation:fadeIn 1s .3s both}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+/* Subject Cards */
+.subjects-wrap{max-width:1200px;margin:40px auto;padding:0 24px}
+.subjects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.subj-card{background:var(--card);padding:30px;border-radius:var(--r);cursor:pointer;border:1px solid var(--border);transition:0.3s}
+.subj-card:hover{transform:translateY(-5px);border-color:var(--a)}
 
-/* ── TOAST ── */
-.toast-wrap{position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none}
-.toast{background:rgba(15,22,41,.9);backdrop-filter:blur(20px);border:1px solid var(--border2);color:var(--text);padding:14px 20px;border-radius:14px;font-size:.875rem;font-weight:500;display:flex;align-items:center;gap:10px;transform:translateY(20px) scale(.95);opacity:0;transition:all .3s cubic-bezier(.16,1,.3,1);pointer-events:all;box-shadow:0 8px 32px rgba(0,0,0,.5)}
-.toast.show{transform:translateY(0) scale(1);opacity:1}
-.toast-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
-.toast.success .toast-icon{background:rgba(34,197,94,.2);color:#22c55e}
-.toast.error .toast-icon{background:rgba(239,68,68,.2);color:#ef4444}
-
-/* ── MOBILE ── */
-@media(max-width:900px){
-  .player-layout{grid-template-columns:1fr}
-  .playlist-sidebar{display:none}
-  nav{padding:0 16px}
-  .nav-links{display:none}
-  .nav-search{width:140px}
-}
-@media(max-width:600px){
-  .stats{margin:40px 16px 0}
-  .stat-item{padding:16px 20px}
-  .player-main{padding:12px}
-  .explore-wrap,.topics-wrap,.search-wrap{padding:24px 16px}
-}
+@media(max-width:900px){.player-layout{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -321,580 +83,139 @@ nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.5)}
 <div class="orb-wrap">
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
 </div>
 
-<!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-logo" onclick="goPage('home')">Study<span>Vault</span></div>
-  <div class="nav-links">
-    <button class="nav-btn active" id="nb-home" onclick="goPage('home')">Home</button>
-    <button class="nav-btn" id="nb-explore" onclick="goPage('explore')">Explore</button>
-    <button class="nav-btn" id="nb-search" onclick="goPage('search')">Search</button>
-  </div>
-  <div class="nav-right">
-    <input class="nav-search" type="text" placeholder="Search lectures..." id="navSearch" onkeydown="if(event.key==='Enter'){goPage('search');doSearch()}"/>
-  </div>
 </nav>
 
-<!-- TOAST -->
-<div class="toast-wrap" id="toastWrap"></div>
-
-<!-- ═══ PAGE: HOME ═══ -->
 <div class="page active" id="page-home">
-  <!-- Compact banner -->
-  <div class="home-banner">
-    <div class="banner-left">
-      <div class="banner-tag"><span class="banner-tag-dot"></span>Premium Learning Platform</div>
-      <div class="banner-title">Study<span class="gr">Vault</span></div>
-      <div class="banner-sub">Select a subject to start learning</div>
-    </div>
-    <div class="banner-stats">
-      <div class="bstat"><div class="bstat-num" id="statBatches">—</div><div class="bstat-lbl">Subjects</div></div>
-      <div class="bstat"><div class="bstat-num" id="statTopics">—</div><div class="bstat-lbl">Chapters</div></div>
-      <div class="bstat"><div class="bstat-num" id="statLectures">—</div><div class="bstat-lbl">Lectures</div></div>
-    </div>
-  </div>
-
-  <!-- Subject Folders — main content, visible immediately -->
   <div class="subjects-wrap">
-    <div class="subjects-label">📁 All Subjects</div>
+    <h2 style="margin-bottom:20px;">📁 Subjects</h2>
     <div class="subjects-grid" id="subjectsGrid">
-      <div class="loading-screen" style="height:200px;grid-column:1/-1"><div class="spinner"></div></div>
+        <div style="color:var(--muted)">Loading your library...</div>
     </div>
   </div>
 </div>
 
-<!-- ═══ PAGE: EXPLORE ═══ -->
-<div class="page" id="page-explore">
-  <div class="explore-wrap">
-    <div class="page-hero">
-      <div class="page-tag">📖 All Courses</div>
-      <h1 class="page-ttl">Explore Everything</h1>
-      <p class="page-desc">Browse all available batches and topics. Click any batch to dive into its lectures.</p>
-    </div>
-    <div class="filter-bar" id="filterBar">
-      <div class="filter-chip active" onclick="filterBatches('all',this)">All Batches</div>
-    </div>
-    <div class="batch-grid" id="exploreBatchGrid">
-      <div class="loading-screen" style="height:300px;grid-column:1/-1"><div class="spinner"></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ PAGE: TOPICS ═══ -->
-<div class="page" id="page-topics">
-  <div class="topics-wrap">
-    <button class="back-btn" onclick="goPage('explore')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-      Back to Explore
-    </button>
-    <div class="topics-header">
-      <div class="topics-icon" id="topicsIcon">?</div>
-      <div class="topics-info">
-        <h1 id="topicsTitle">Batch Name</h1>
-        <p id="topicsDesc">Loading topics...</p>
-        <div class="tags" id="topicsTags"></div>
-      </div>
-    </div>
-    <div id="topicsBody"></div>
-  </div>
-</div>
-
-<!-- ═══ PAGE: PLAYER ═══ -->
 <div class="page" id="page-player">
   <div class="player-layout">
     <div class="player-main">
       <div class="player-video-wrap">
         <div id="ytContainer"></div>
+        
         <div class="yt-mask-top"></div>
         <div class="yt-mask-bot"></div>
         <div class="yt-mask-corner"></div>
-        <div class="player-overlay paused" id="playerOverlay"
-             onclick="handleOverlayClick(event)"
-             ondblclick="handleOverlayDbl(event)">
-          <div class="player-overlay-top">
-            <div class="skip-zone" id="skipL" style="justify-content:flex-start;padding-left:20px"></div>
-            <div style="flex:1"></div>
-            <div class="skip-zone" id="skipR" style="justify-content:flex-end;padding-right:20px"></div>
-          </div>
+
+        <div class="player-overlay paused" id="playerOverlay">
           <div class="play-center">
-            <div class="play-btn-big">
+            <div class="play-btn-big" onclick="tPlay()">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
-          <div class="player-controls" onclick="event.stopPropagation()">
-            <div class="progress-wrap" id="progressWrap" onclick="seekBar(event)">
-              <div class="progress-fill" id="progressFill"></div>
-              <div class="progress-dot"></div>
+
+          <div class="player-controls">
+            <div class="progress-wrap" onclick="seekBar(event)" id="pWrap">
+              <div class="progress-fill" id="pFill"></div>
             </div>
             <div class="controls-row">
-              <button class="ctrl-btn" onclick="tPlay()" title="Play/Pause">
-                <svg id="playIco" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <button class="ctrl-btn" onclick="tPlay()" id="playBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
               </button>
-              <button class="ctrl-btn skip-btn" onclick="skipSec(-10)" title="Rewind 10s">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 5V1l-5 5 5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>10
+              <button class="ctrl-btn" onclick="skipSec(-10)" title="Rewind 10s">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
               </button>
-              <button class="ctrl-btn skip-btn" onclick="skipSec(10)" title="Forward 10s">
-                10<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/></svg>
+              <button class="ctrl-btn" onclick="skipSec(10)" title="Forward 10s">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13 6v12l8.5-6L13 6zM4 6v12l8.5-6L4 6z"/></svg>
               </button>
               <span class="time-disp" id="timeDisp">0:00 / 0:00</span>
+              
               <div class="ctrl-spacer"></div>
-              <div class="vol-wrap">
-                <button class="ctrl-btn" onclick="tMute()" title="Mute">
-                  <svg id="volIco" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-                </button>
-                <input type="range" class="vol-slider" min="0" max="100" value="100" oninput="setVol(this.value)" id="volSlider"/>
-              </div>
-              <select class="speed-sel" onchange="setSp(this.value)" title="Speed">
-                <option value="0.5">0.5×</option><option value="0.75">0.75×</option>
-                <option value="1" selected>1×</option><option value="1.25">1.25×</option>
-                <option value="1.5">1.5×</option><option value="1.75">1.75×</option>
-                <option value="2">2×</option><option value="2.5">2.5×</option>
+
+              <select class="speed-sel" onchange="setSp(this.value)">
+                <option value="0.5">0.5x</option><option value="1" selected>1x</option>
+                <option value="1.5">1.5x</option><option value="2">2x</option>
               </select>
-              <select class="qual-sel" id="qualSel" onchange="setQ(this.value)" title="Quality">
-                <option value="auto">Auto</option>
+              
+              <select class="qual-sel" id="qualSel" onchange="setQ(this.value)">
+                <option value="auto">Auto Quality</option>
               </select>
-              <button class="ctrl-btn" onclick="tFS()" title="Fullscreen">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+
+              <button class="ctrl-btn" onclick="tFS()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
               </button>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="player-info">
-        <div class="now-tag"><span class="dot-live"></span>Now Playing</div>
-        <div class="player-title" id="playerTitle">Loading...</div>
-        <div class="player-meta">
-          <span class="pm-item" id="playerBatch">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>—
-          </span>
-          <span class="pm-item" id="playerTopic">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>—
-          </span>
-        </div>
-        <div class="player-nav">
-          <button class="pn-btn" id="prevBtn" onclick="playAdj(-1)" disabled>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            Previous
-          </button>
-          <button class="pn-btn" id="nextBtn" onclick="playAdj(1)" disabled>
-            Next
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-          </button>
-        </div>
+      <div class="player-info" style="margin-top:20px;">
+        <h1 id="pTitle" style="font-family:'Space Grotesk'; font-size:1.5rem;">Lecture Title</h1>
+        <p id="pMeta" style="color:var(--muted2); margin-top:5px;">Batch Info</p>
       </div>
     </div>
-
-    <!-- Playlist -->
-    <div class="playlist-sidebar">
-      <div class="ps-header">
-        <div class="ps-title" id="psTitle">Playlist</div>
-        <div class="ps-sub" id="psSub">0 lectures</div>
-      </div>
-      <div class="ps-list" id="psList"></div>
+    <div class="playlist-sidebar" style="background:var(--s1); padding:20px; border-left:1px solid var(--border);">
+        <h3 style="margin-bottom:15px; font-family:'Space Grotesk';">Playlist</h3>
+        <div id="sidePlaylist"></div>
     </div>
-  </div>
-</div>
-
-<!-- ═══ PAGE: SEARCH ═══ -->
-<div class="page" id="page-search">
-  <div class="search-wrap">
-    <div class="page-hero">
-      <div class="page-tag">🔍 Search</div>
-      <h1 class="page-ttl">Find Any Lecture</h1>
-    </div>
-    <div class="search-big">
-      <input type="text" id="searchInput" placeholder="Search by title, batch or topic..." onkeydown="if(event.key==='Enter')doSearch()"/>
-      <button onclick="doSearch()">Search</button>
-    </div>
-    <div id="searchResults"></div>
   </div>
 </div>
 
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
-/* ════════════════════
-   DEMO DATA — shown when MongoDB is empty
-════════════════════ */
-const DEMO_DATA = {
-  "Physics": {
-    "Mechanics": [
-      {title:"Lecture 1 — Introduction to Motion", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Newton's Laws of Motion", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Work, Energy & Power", yt_id:"", yt_link:""},
-      {title:"Lecture 4 — Circular Motion", yt_id:"", yt_link:""}
-    ],
-    "Thermodynamics": [
-      {title:"Lecture 1 — Heat & Temperature", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Laws of Thermodynamics", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Entropy & Applications", yt_id:"", yt_link:""}
-    ],
-    "Electrostatics": [
-      {title:"Lecture 1 — Coulomb's Law", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Electric Field & Potential", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Capacitance", yt_id:"", yt_link:""}
-    ]
-  },
-  "Chemistry": {
-    "Organic Chemistry": [
-      {title:"Lecture 1 — Hydrocarbons Basics", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Functional Groups", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Reactions & Mechanisms", yt_id:"", yt_link:""}
-    ],
-    "Inorganic Chemistry": [
-      {title:"Lecture 1 — Periodic Table & Trends", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Chemical Bonding", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Coordination Compounds", yt_id:"", yt_link:""}
-    ],
-    "Physical Chemistry": [
-      {title:"Lecture 1 — Atomic Structure", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Equilibrium", yt_id:"", yt_link:""}
-    ]
-  },
-  "Mathematics": {
-    "Basic Math": [
-      {title:"Lecture 1 — Number System", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Fractions & Decimals", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Percentages & Ratios", yt_id:"", yt_link:""},
-      {title:"Lecture 4 — LCM, HCF & Sets", yt_id:"", yt_link:""}
-    ],
-    "Algebra": [
-      {title:"Lecture 1 — Linear Equations", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Quadratic Equations", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Polynomials", yt_id:"", yt_link:""},
-      {title:"Lecture 4 — Sequences & Series", yt_id:"", yt_link:""}
-    ],
-    "Calculus": [
-      {title:"Lecture 1 — Limits & Continuity", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Differentiation Basics", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Applications of Derivatives", yt_id:"", yt_link:""},
-      {title:"Lecture 4 — Integration", yt_id:"", yt_link:""}
-    ],
-    "Trigonometry": [
-      {title:"Lecture 1 — Trigonometric Ratios", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Identities & Formulas", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Inverse Trigonometry", yt_id:"", yt_link:""}
-    ]
-  },
-  "Biology": {
-    "Cell Biology": [
-      {title:"Lecture 1 — Cell Structure & Organelles", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Cell Division — Mitosis", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Cell Division — Meiosis", yt_id:"", yt_link:""}
-    ],
-    "Genetics": [
-      {title:"Lecture 1 — DNA Structure & Replication", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Mendelian Genetics", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Mutations & Genetic Disorders", yt_id:"", yt_link:""}
-    ],
-    "Human Physiology": [
-      {title:"Lecture 1 — Digestive System", yt_id:"", yt_link:""},
-      {title:"Lecture 2 — Circulatory System", yt_id:"", yt_link:""},
-      {title:"Lecture 3 — Respiratory System", yt_id:"", yt_link:""}
-    ]
-  },
-  "PYQ": {
-    "2024 Paper": [
-      {title:"2024 Full Paper Discussion", yt_id:"", yt_link:""},
-      {title:"2024 Tricky Questions Solved", yt_id:"", yt_link:""},
-      {title:"2024 Answer Key Review", yt_id:"", yt_link:""}
-    ],
-    "2023 Paper": [
-      {title:"2023 Full Paper Discussion", yt_id:"", yt_link:""},
-      {title:"2023 Most Important Questions", yt_id:"", yt_link:""}
-    ],
-    "2022 Paper": [
-      {title:"2022 Full Paper Discussion", yt_id:"", yt_link:""},
-      {title:"2022 Analysis & Strategy", yt_id:"", yt_link:""}
-    ]
-  },
-  "Questions Discussion": {
-    "Doubt Sessions": [
-      {title:"Doubt Session 1 — Physics Doubts", yt_id:"", yt_link:""},
-      {title:"Doubt Session 2 — Chemistry Doubts", yt_id:"", yt_link:""},
-      {title:"Doubt Session 3 — Math Doubts", yt_id:"", yt_link:""},
-      {title:"Doubt Session 4 — Biology Doubts", yt_id:"", yt_link:""}
-    ],
-    "Important Questions": [
-      {title:"Top 50 Physics Questions", yt_id:"", yt_link:""},
-      {title:"Top 50 Chemistry Questions", yt_id:"", yt_link:""},
-      {title:"Top 50 Math Questions", yt_id:"", yt_link:""}
-    ]
-  }
-};
-
-/* ════════════════════
-   DATA & STATE
-════════════════════ */
-let DATA = {};          // {batchName: {topicName: [{title,yt_id,yt_link}]}}
-let isDemoMode = false;
+let DATA = {};
 let player = null;
 let timerID = null;
-let isMuted = false;
-let curBatch = '', curTopic = '', curIdx = -1;
-let curPlaylist = [];   // flat list of {title, yt_id, batch, topic}
-let ytReady = false;
-let pendingPlay = null;
-
-/* ── Bootstrap ── */
-window.onYouTubeIframeAPIReady = () => { ytReady = true; if(pendingPlay) { const p=pendingPlay; pendingPlay=null; playVideo(p.vid, p.title, p.batch, p.topic, p.idx, p.list); } };
 
 async function boot() {
   try {
     const r = await fetch('/api/data');
-    if (!r.ok) throw new Error('API error');
     const j = await r.json();
     DATA = j.batches || {};
-    if (!Object.keys(DATA).length) { DATA = DEMO_DATA; isDemoMode = true; }
     renderHome();
-    renderExplore();
-  } catch(e) {
-    DATA = DEMO_DATA; isDemoMode = true;
-    renderHome();
-    renderExplore();
-  }
-}
-
-/* ════════════════════
-   NAVIGATION
-════════════════════ */
-function goPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active','page-enter'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  const pg = document.getElementById('page-' + id);
-  if (pg) { pg.classList.add('active'); setTimeout(() => pg.classList.add('page-enter'), 10); }
-  const nb = document.getElementById('nb-' + id);
-  if (nb) nb.classList.add('active');
-  window.scrollTo(0,0);
-}
-
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
-});
-
-/* ════════════════════
-   HOME
-════════════════════ */
-function subjectClass(name) {
-  const n = name.toLowerCase();
-  if (n.includes('phy')) return 'subj-physics';
-  if (n.includes('chem') || n.includes('che')) return 'subj-chem';
-  if (n.includes('math') || n.includes('maths')) return 'subj-math';
-  if (n.includes('bio')) return 'subj-bio';
-  if (n.includes('pyq') || n.includes('previous')) return 'subj-pyq';
-  if (n.includes('question') || n.includes('doubt') || n.includes('discuss')) return 'subj-doubt';
-  return 'subj-default';
+  } catch(e) { console.error("Data load failed"); }
 }
 
 function renderHome() {
-  const batches = Object.keys(DATA);
-  let topics = 0, lectures = 0;
-  batches.forEach(b => { const ts = Object.keys(DATA[b]); topics += ts.length; ts.forEach(t => lectures += DATA[b][t].length); });
-
-  animNum('statBatches', batches.length);
-  animNum('statTopics', topics);
-  animNum('statLectures', lectures);
-
   const grid = document.getElementById('subjectsGrid');
-  if (!batches.length) { grid.innerHTML = '<div class="loading-screen" style="height:200px;grid-column:1/-1">No subjects yet</div>'; return; }
-  grid.innerHTML = batches.map((b,i) => subjectCardHTML(b, i)).join('');
-  setTimeout(() => grid.querySelectorAll('.sc-bar').forEach(el => { el.style.width = (Math.random()*50+30)+'%'; }), 150);
-}
-
-function subjectCardHTML(b, i) {
-  const ts = Object.keys(DATA[b]);
-  const lecs = ts.reduce((s,t) => s+DATA[b][t].length, 0);
-  const ico = subjectIcon(b);
-  const cls = subjectClass(b);
-  const pills = ts.slice(0,4).map(t=>`<span class="sc-chapter">${t}</span>`).join('');
-  const extra = ts.length>4 ? `<span class="sc-chapter">+${ts.length-4} more</span>` : '';
-  return `<div class="subj-card ${cls}" onclick="openBatch('${esc(b)}')" style="animation:fadeUp .4s ${i*0.07}s both">
-    <div class="sc-top">
-      <div class="sc-emoji">${ico}</div>
-      <div class="sc-info">
-        <div class="sc-name">${b}</div>
-        <div class="sc-meta"><span>📚 ${ts.length} chapters</span><span>🎬 ${lecs} lectures</span></div>
-      </div>
-    </div>
-    <div class="sc-chapters">${pills}${extra}</div>
-    <div class="sc-footer">
-      <div class="sc-bar-wrap"><div class="sc-bar"></div></div>
-      <div class="sc-arrow">›</div>
-    </div>
-  </div>`;
-}
-
-function animNum(id, target) {
-  let c = 0; const el = document.getElementById(id); const step = Math.ceil(target/40);
-  const t = setInterval(() => { c = Math.min(c+step, target); el.textContent = c; if(c>=target) clearInterval(t); }, 30);
-}
-
-/* ════════════════════
-   EXPLORE
-════════════════════ */
-function renderExplore() {
   const batches = Object.keys(DATA);
-  const grid = document.getElementById('exploreBatchGrid');
-  if (!batches.length) { grid.innerHTML = '<div class="loading-screen" style="height:300px;grid-column:1/-1">No batches available</div>'; return; }
-  grid.innerHTML = batches.map(b => batchCardHTML(b, false)).join('');
-  setTimeout(() => grid.querySelectorAll('.bc-bar').forEach(el => { el.style.width = (Math.random()*60+20)+'%'; }), 100);
-}
-
-function subjectIcon(name) {
-  const n = name.toLowerCase();
-  if (n.includes('physics') || n.includes('phy')) return '⚛️';
-  if (n.includes('chem') || n.includes('che')) return '🧪';
-  if (n.includes('math') || n.includes('maths')) return '📐';
-  if (n.includes('bio') || n.includes('biology')) return '🧬';
-  if (n.includes('pyq') || n.includes('previous')) return '📝';
-  if (n.includes('question') || n.includes('doubt') || n.includes('discuss')) return '💬';
-  if (n.includes('english') || n.includes('eng')) return '📖';
-  if (n.includes('history') || n.includes('geo') || n.includes('social')) return '🌍';
-  if (n.includes('computer') || n.includes('cs') || n.includes('coding')) return '💻';
-  return name.substring(0,2).toUpperCase();
-}
-
-function batchCardHTML(b, compact) {
-  const ts = Object.keys(DATA[b]);
-  const lecs = ts.reduce((s,t) => s+DATA[b][t].length, 0);
-  const ic = subjectIcon(b);
-  const topicPills = ts.slice(0,3).map(t=>`<span class="bc-topic">${t}</span>`).join('') + (ts.length>3?`<span class="bc-topic">+${ts.length-3}</span>`:'');
-  return `<div class="batch-card" onclick="openBatch('${esc(b)}')">
-    <div class="bc-top">
-      <div class="bc-icon">${ic}</div>
-      <div class="bc-meta">
-        <div class="bc-name">${b}</div>
-        <div class="bc-stats">
-          <span class="bc-stat">📚 ${ts.length} topics</span>
-          <span class="bc-stat">🎬 ${lecs} lectures</span>
-        </div>
-      </div>
-    </div>
-    <div class="bc-topics">${topicPills}</div>
-    <div class="bc-footer">
-      <div class="bc-bar-wrap"><div class="bc-bar"></div></div>
-      <button class="bc-open" onclick="event.stopPropagation();openBatch('${esc(b)}')">Open ›</button>
-    </div>
-  </div>`;
-}
-
-function filterBatches(key, el) {
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  // future: filter logic
-}
-
-/* ════════════════════
-   TOPICS PAGE
-════════════════════ */
-function openBatch(b) {
-  curBatch = b;
-  const ts = Object.keys(DATA[b] || {});
-  const lecs = ts.reduce((s,t)=>s+DATA[b][t].length,0);
-  const ic = b.substring(0,2).toUpperCase();
-
-  document.getElementById('topicsIcon').textContent = subjectIcon(b);
-  document.getElementById('topicsTitle').textContent = b;
-  document.getElementById('topicsDesc').textContent = `${ts.length} topics · ${lecs} lectures`;
-  document.getElementById('topicsTags').innerHTML = ts.slice(0,5).map(t=>`<span class="tag">${t}</span>`).join('');
-
-  document.getElementById('topicsBody').innerHTML = ts.map((t,i) => {
-    const list = DATA[b][t] || [];
-    return `<div class="topic-section" id="ts${i}">
-      <div class="topic-hdr" onclick="toggleTopic(${i})">
-        <div class="topic-num">${String(i+1).padStart(2,'0')}</div>
-        <div class="topic-name">${t}</div>
-        <div class="topic-count">${list.length} lec</div>
-        <svg class="topic-chevron" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
-      </div>
-      <div class="lectures-list">${list.map((l,li)=>`
-        <div class="lec-item" id="li${i}_${li}" onclick="openPlayer('${esc(l.yt_id)}','${esc(l.title)}','${esc(b)}','${esc(t)}',${li},${i})">
-          <div class="lec-idx">${String(li+1).padStart(2,'0')}</div>
-          <div class="lec-title">${l.title}</div>
-          <svg class="lec-play-ico" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </div>`).join('')}
-      </div>
-    </div>`;
-  }).join('');
-
-  goPage('topics');
-}
-
-function toggleTopic(i) {
-  const el = document.getElementById('ts' + i);
-  el.classList.toggle('open');
-}
-
-/* ════════════════════
-   PLAYER
-════════════════════ */
-function openPlayer(vid, title, batch, topic, lecIdx, topicIdx) {
-  // Build flat playlist for this topic
-  const list = (DATA[batch]||{})[topic] || [];
-  curPlaylist = list.map((l,i)=>({...l, batch, topic, idx:i, topicIdx}));
-  curIdx = lecIdx;
-  curBatch = batch; curTopic = topic;
-
-  goPage('player');
-  setupPlaylist();
-  playVideo(vid, title, batch, topic, lecIdx, curPlaylist);
-}
-
-function setupPlaylist() {
-  document.getElementById('psTitle').textContent = curTopic;
-  document.getElementById('psSub').textContent = curPlaylist.length + ' lectures';
-  document.getElementById('psList').innerHTML = curPlaylist.map((l,i)=>`
-    <div class="ps-item ${i===curIdx?'active':''}" id="psi${i}" onclick="playFromPlaylist(${i})">
-      <div class="ps-num">${String(i+1).padStart(2,'0')}</div>
-      <div class="ps-name">${l.title}</div>
-      <svg class="ps-ico" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+  if(!batches.length) { grid.innerHTML = "No videos found."; return; }
+  grid.innerHTML = batches.map(b => `
+    <div class="subj-card" onclick="openBatch('${b}')">
+        <div style="font-size:2rem; margin-bottom:10px;">📚</div>
+        <div style="font-weight:700; font-size:1.1rem;">${b}</div>
+        <div style="font-size:0.85rem; color:var(--muted2); margin-top:5px;">Explore Chapters ›</div>
     </div>`).join('');
-  updateNavBtns();
 }
 
-function playFromPlaylist(i) {
-  const l = curPlaylist[i];
-  if (!l) return;
-  curIdx = i;
-  document.querySelectorAll('.ps-item').forEach((el,j)=>el.classList.toggle('active',j===i));
-  document.querySelectorAll('.lec-item').forEach(el=>el.classList.remove('playing'));
-  updateNavBtns();
-  playVideo(l.yt_id, l.title, l.batch, l.topic, i, curPlaylist);
+function openBatch(b) {
+    const topics = DATA[b];
+    const firstTopic = Object.keys(topics)[0];
+    const firstLec = topics[firstTopic][0];
+    playVideo(firstLec.yt_id, firstLec.title, b, firstTopic);
+    goPage('player');
 }
 
-function playAdj(dir) {
-  const ni = curIdx + dir;
-  if (ni < 0 || ni >= curPlaylist.length) return;
-  playFromPlaylist(ni);
+function goPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
 }
 
-function updateNavBtns() {
-  document.getElementById('prevBtn').disabled = curIdx <= 0;
-  document.getElementById('nextBtn').disabled = curIdx >= curPlaylist.length-1;
-}
+// ── PLAYER LOGIC ──
 
-function playVideo(vid, title, batch, topic, idx, list) {
-  document.getElementById('playerTitle').textContent = title;
-  document.getElementById('playerBatch').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>${batch}`;
-  document.getElementById('playerTopic').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>${topic}`;
-
-  if (!vid) { showToast('Demo lecture — upload real videos via your bot to watch.', 'error'); return; }
-  if (!ytReady) { pendingPlay = {vid, title, batch, topic, idx, list}; return; }
+function playVideo(vid, title, batch, topic) {
+  document.getElementById('pTitle').textContent = title;
+  document.getElementById('pMeta').textContent = `${batch} • ${topic}`;
 
   if (player && player.loadVideoById) {
     player.loadVideoById(vid);
-    setPaused(false);
-    resetProgress();
   } else {
-    if (player) { try{player.destroy();}catch(e){} }
-    document.getElementById('ytContainer').innerHTML = '';
-    const div = document.createElement('div'); div.id='ytPlayer';
-    document.getElementById('ytContainer').appendChild(div);
-    player = new YT.Player('ytPlayer', {
+    player = new YT.Player('ytContainer', {
       videoId: vid,
-      playerVars: {controls:0,modestbranding:1,rel:0,iv_load_policy:3,disablekb:1,fs:0,playsinline:1,origin:location.origin,enablejsapi:1},
+      playerVars: { 
+        controls: 0, modestbranding: 1, rel: 0, iv_load_policy: 3, 
+        disablekb: 1, fs: 0, playsinline: 1, enablejsapi: 1 
+      },
       events: {
         onReady: e => { e.target.playVideo(); setPaused(false); },
         onStateChange: onStateChange
@@ -904,156 +225,76 @@ function playVideo(vid, title, batch, topic, idx, list) {
 }
 
 function onStateChange(e) {
-  if (e.data === YT.PlayerState.PLAYING) { setPaused(false); startTimer(); loadQualities(); }
-  else if (e.data === YT.PlayerState.PAUSED) { setPaused(true); stopTimer(); }
-  else if (e.data === YT.PlayerState.ENDED) { setPaused(true); stopTimer(); playAdj(1); }
+  if (e.data === YT.PlayerState.PLAYING) { 
+      setPaused(false); 
+      startTimer(); 
+      loadQualities(); 
+  } else { 
+      setPaused(true); 
+      stopTimer(); 
+  }
 }
 
 function setPaused(p) {
-  document.getElementById('playerOverlay').classList.toggle('paused', p);
-  document.getElementById('playIco').innerHTML = p
-    ? '<path d="M8 5v14l11-7z"/>'
-    : '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+  const overlay = document.getElementById('playerOverlay');
+  overlay.classList.toggle('paused', p);
+  document.getElementById('playBtn').innerHTML = p 
+    ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' 
+    : '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
 }
 
-function resetProgress() { document.getElementById('progressFill').style.width='0%'; document.getElementById('timeDisp').textContent='0:00 / 0:00'; }
+function tPlay() { 
+    if(!player) return;
+    const state = player.getPlayerState();
+    state === YT.PlayerState.PLAYING ? player.pauseVideo() : player.playVideo();
+}
+
+function skipSec(s) { if(player) player.seekTo(player.getCurrentTime() + s, true); }
+
+function setSp(v) { if(player) player.setPlaybackRate(parseFloat(v)); }
+
+function setQ(v) { if(player) player.setPlaybackQuality(v === 'auto' ? 'default' : v); }
+
+function loadQualities() {
+  if(!player || !player.getAvailableQualityLevels) return;
+  const lvls = player.getAvailableQualityLevels();
+  const sel = document.getElementById('qualSel');
+  sel.innerHTML = '<option value="auto">Auto Quality</option>' + 
+    lvls.map(q => `<option value="${q}">${q}</option>`).join('');
+}
 
 function startTimer() {
   stopTimer();
   timerID = setInterval(() => {
-    if (!player || !player.getCurrentTime) return;
-    const c = player.getCurrentTime()||0, d = player.getDuration()||0;
-    if (d > 0) {
-      document.getElementById('progressFill').style.width = (c/d*100)+'%';
-      document.getElementById('timeDisp').textContent = `${fmt(c)} / ${fmt(d)}`;
+    if(!player || !player.getCurrentTime) return;
+    const c = player.getCurrentTime(), d = player.getDuration();
+    if(d > 0) {
+        document.getElementById('pFill').style.width = (c/d*100)+'%';
+        document.getElementById('timeDisp').textContent = `${fmt(c)} / ${fmt(d)}`;
     }
   }, 500);
 }
-function stopTimer() { if(timerID) { clearInterval(timerID); timerID=null; } }
 
-function tPlay() { if(!player) return; player.getPlayerState()===YT.PlayerState.PLAYING?player.pauseVideo():player.playVideo(); }
-function skipSec(s) { if(!player||!player.getCurrentTime) return; player.seekTo(Math.max(0,player.getCurrentTime()+s),true); showSkipAnim(s); }
-function setVol(v) { if(player) player.setVolume(parseInt(v)); }
-function tMute() {
-  if(!player) return; isMuted=!isMuted; isMuted?player.mute():player.unMute();
-  document.getElementById('volIco').innerHTML = isMuted
-    ? '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>'
-    : '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>';
-}
-function setSp(v) { if(player) player.setPlaybackRate(parseFloat(v)); }
-function setQ(v) { if(player) player.setPlaybackQuality(v==='auto'?'default':v); }
-function tFS() { const w=document.querySelector('.player-video-wrap'); document.fullscreenElement?document.exitFullscreen():w.requestFullscreen(); }
-function loadQualities() {
-  if(!player||!player.getAvailableQualityLevels) return;
-  const lvls=player.getAvailableQualityLevels(), cur=player.getPlaybackQuality();
-  document.getElementById('qualSel').innerHTML='<option value="auto">Auto</option>'+lvls.map(q=>`<option value="${q}"${q===cur?' selected':''}>${q}</option>`).join('');
+function stopTimer() { clearInterval(timerID); }
+
+function fmt(s) { 
+    const m = Math.floor(s/60), sc = Math.floor(s%60); 
+    return `${m}:${sc.toString().padStart(2,'0')}`; 
 }
 
 function seekBar(e) {
-  if(!player||!player.getDuration) return;
-  const b=document.getElementById('progressWrap');
-  const pct=Math.max(0,Math.min(1,e.offsetX/b.offsetWidth));
-  player.seekTo(pct*player.getDuration(),true);
+  if(!player) return;
+  const b = document.getElementById('pWrap');
+  const pct = e.offsetX / b.offsetWidth;
+  player.seekTo(pct * player.getDuration(), true);
 }
 
-function handleOverlayClick(e) {
-  if (e.target.closest('.player-controls')) return;
-  if (e.target.closest('.skip-zone')) return;
-  tPlay();
+function tFS() {
+    const el = document.querySelector('.player-video-wrap');
+    if (!document.fullscreenElement) el.requestFullscreen();
+    else document.exitFullscreen();
 }
 
-function handleOverlayDbl(e) {
-  const rect = e.currentTarget.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  if (x < rect.width/2) skipSec(-10);
-  else skipSec(10);
-}
-
-let skipTimer = null;
-function showSkipAnim(s) {
-  const side = s > 0 ? 'skipR' : 'skipL';
-  const el = document.getElementById(side);
-  el.innerHTML = `<div class="skip-anim">${s>0?'»':'«'} ${Math.abs(s)}s</div>`;
-  el.classList.add('show');
-  clearTimeout(skipTimer);
-  skipTimer = setTimeout(()=>{ el.classList.remove('show'); el.innerHTML=''; },700);
-}
-
-/* Keyboard shortcuts */
-document.addEventListener('keydown', e => {
-  const pg = document.querySelector('.page.active');
-  if (!pg || pg.id !== 'page-player') return;
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
-  if (e.code==='Space'){e.preventDefault();tPlay();}
-  if (e.code==='ArrowRight'){e.preventDefault();skipSec(10);}
-  if (e.code==='ArrowLeft'){e.preventDefault();skipSec(-10);}
-  if (e.code==='ArrowUp'){e.preventDefault();const sl=document.getElementById('volSlider');sl.value=Math.min(100,+sl.value+5);setVol(sl.value);}
-  if (e.code==='ArrowDown'){e.preventDefault();const sl=document.getElementById('volSlider');sl.value=Math.max(0,+sl.value-5);setVol(sl.value);}
-  if (e.code==='KeyF'){e.preventDefault();tFS();}
-  if (e.code==='KeyN'){e.preventDefault();playAdj(1);}
-  if (e.code==='KeyP'){e.preventDefault();playAdj(-1);}
-});
-
-/* ════════════════════
-   SEARCH
-════════════════════ */
-function doSearch() {
-  const q = (document.getElementById('searchInput').value || document.getElementById('navSearch').value).toLowerCase().trim();
-  document.getElementById('searchInput').value = q;
-  const res = document.getElementById('searchResults');
-  if (!q) { res.innerHTML = ''; return; }
-  let hits = [];
-  Object.keys(DATA).forEach(b => {
-    Object.keys(DATA[b]).forEach(t => {
-      DATA[b][t].forEach((l,i) => {
-        if (l.title.toLowerCase().includes(q) || b.toLowerCase().includes(q) || t.toLowerCase().includes(q)) {
-          hits.push({...l, batch:b, topic:t, idx:i});
-        }
-      });
-    });
-  });
-  if (!hits.length) { res.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">No results found for "<strong>'+q+'</strong>"</div>'; return; }
-  res.innerHTML = hits.map(h=>`
-    <div class="sr-item" onclick="openPlayer('${esc(h.yt_id)}','${esc(h.title)}','${esc(h.batch)}','${esc(h.topic)}',${h.idx},0)">
-      <div class="sr-icon">▶</div>
-      <div class="sr-info">
-        <div class="sr-title">${h.title}</div>
-        <div class="sr-meta">${h.batch} · ${h.topic}</div>
-      </div>
-    </div>`).join('');
-}
-
-/* ════════════════════
-   UTILS
-════════════════════ */
-function fmt(s) { const m=Math.floor(s/60),sc=Math.floor(s%60); return`${m}:${sc.toString().padStart(2,'0')}`; }
-function esc(s) { return (s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
-
-function showToast(msg, type='success') {
-  const wrap = document.getElementById('toastWrap');
-  const t = document.createElement('div');
-  t.className = 'toast ' + type;
-  t.innerHTML = `<div class="toast-icon">${type==='success'?'✓':'✕'}</div>${msg}`;
-  wrap.appendChild(t);
-  setTimeout(()=>t.classList.add('show'),50);
-  setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>t.remove(),400); }, 3000);
-}
-
-/* ── 3D card tilt on mouse move ── */
-document.addEventListener('mousemove', e => {
-  document.querySelectorAll('.batch-card,.feat-card').forEach(card => {
-    const r = card.getBoundingClientRect();
-    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return;
-    const x = (e.clientX - r.left)/r.width - .5;
-    const y = (e.clientY - r.top)/r.height - .5;
-    card.style.transform = `perspective(600px) rotateX(${-y*10}deg) rotateY(${x*10}deg) translateY(-6px)`;
-  });
-});
-document.addEventListener('mouseleave', e => {
-  document.querySelectorAll('.batch-card,.feat-card').forEach(c => c.style.transform = '');
-}, true);
-
-/* ── Boot ── */
 boot();
 </script>
 </body>
