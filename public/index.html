@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>StudyVault — Premium Learning</title>
+<title>CourierWell — Premium Learning</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -293,7 +293,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:64px;
 </div>
 
 <nav id="navbar">
-  <div class="nav-logo" onclick="goPage('home')">Study<span>Vault</span></div>
+  <div class="nav-logo" onclick="goPage('home')">Courier<span>Well</span></div>
   <div class="nav-links">
     <button class="nav-btn active" id="nb-home" onclick="goPage('home')">Home</button>
     <button class="nav-btn" id="nb-explore" onclick="goPage('explore')">Explore</button>
@@ -307,12 +307,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:64px;
 
 <div class="toast-wrap" id="toastWrap"></div>
 
-<!-- HOME -->
 <div class="page active" id="page-home">
   <div class="home-banner">
     <div>
       <div class="banner-tag"><span class="banner-tag-dot"></span>Premium Learning Platform</div>
-      <div class="banner-title">Study<span class="gr">Vault</span></div>
+      <div class="banner-title">Courier<span class="gr">Well</span></div>
       <div class="banner-sub">Select a subject to start learning</div>
     </div>
     <div class="banner-stats">
@@ -329,7 +328,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:64px;
   </div>
 </div>
 
-<!-- EXPLORE -->
 <div class="page" id="page-explore">
   <div class="explore-wrap">
     <div class="page-hero">
@@ -343,7 +341,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:64px;
   </div>
 </div>
 
-<!-- TOPICS -->
 <div class="page" id="page-topics">
   <div class="topics-wrap">
     <button class="back-btn" onclick="goPage('explore')">
@@ -362,12 +359,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:64px;
   </div>
 </div>
 
-<!-- PLAYER -->
 <div class="page" id="page-player">
   <div class="player-layout">
     <div class="player-main">
 
-      <!-- Video box: clean YT embed, full area -->
       <div class="video-box" id="videoBox">
         <iframe
           id="ytFrame"
@@ -378,7 +373,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:64px;
         </iframe>
       </div>
 
-      <!-- Controls: speed + open YT + next/prev -->
       <div class="v-controls">
         <button class="vc-btn" onclick="playAdj(-1)" id="prevBtn" disabled>
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
@@ -404,7 +398,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:64px;
         </button>
       </div>
 
-      <!-- Info -->
       <div class="player-info">
         <div class="now-tag"><span class="dot-live"></span>Now Playing</div>
         <div class="player-title" id="playerTitle">Loading...</div>
@@ -415,7 +408,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:64px;
       </div>
     </div>
 
-    <!-- Sidebar playlist -->
     <div class="playlist-sidebar">
       <div class="ps-header">
         <div class="ps-title" id="psTitle">Playlist</div>
@@ -426,7 +418,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 32px;height:64px;
   </div>
 </div>
 
-<!-- SEARCH -->
 <div class="page" id="page-search">
   <div class="search-wrap">
     <div class="page-hero">
@@ -692,3 +683,4 @@ boot();
 </script>
 </body>
 </html>
+
